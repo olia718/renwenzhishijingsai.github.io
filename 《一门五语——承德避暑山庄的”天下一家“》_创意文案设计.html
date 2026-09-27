@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>一门五语——承德避暑山庄的"天下一家"</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{width:100%;height:100%;overflow:hidden;background:#0f0c0a;
+  font-family:"Songti SC","STSong","SimSun","Noto Serif SC",serif;color:#f2ece1}
+#wrap{width:100%;height:100%;overflow-y:scroll;scroll-snap-type:y mandatory;
+  scroll-behavior:smooth;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+#wrap::-webkit-scrollbar{display:none}
+.page{width:100%;height:100%;scroll-snap-align:start;position:relative;overflow:hidden;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  padding:8vh 8vw;text-align:center}
+.bg{position:absolute;inset:0;z-index:0}
+.bg::after{content:"";position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 40%,rgba(200,164,92,.14),transparent 62%)}
+.line{position:absolute;left:50%;transform:translateX(-50%);width:1px;background:linear-gradient(180deg,transparent,rgba(200,164,92,.5),transparent)}
+.z{position:relative;z-index:2;width:100%}
+
+/* 通用文字 */
+.kicker{font-size:12px;letter-spacing:.5em;color:#c8a45c;opacity:.85;margin-bottom:2.2vh}
+h1.big{font-size:13vw;letter-spacing:.18em;line-height:1.1;
+  background:linear-gradient(180deg,#fbf3e2,#c8a45c);-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{font-size:6.4vw;letter-spacing:.08em;line-height:1.35;margin-bottom:2.4vh;color:#fbf3e2}
+.sub{font-size:3.6vw;line-height:2;color:#d8cfc0;letter-spacing:.03em}
+.small{font-size:3.1vw;line-height:1.9;color:#a99e8d;letter-spacing:.02em}
+.gold{color:#c8a45c}
+.verm{color:#c0523f}
+.quote{font-size:4.2vw;line-height:1.85;color:#e8dcc4;letter-spacing:.05em}
+.jinju{margin-top:3vh;font-size:4.4vw;line-height:1.8;color:#c8a45c;letter-spacing:.04em}
+.jinju::before,.jinju::after{content:"";display:block;width:14%;height:1px;background:#c8a45c;margin:1.6vh auto;opacity:.6}
+.src{margin-top:1.8vh;font-size:2.9vw;color:#8d8375;letter-spacing:.02em}
+
+/* P1 封面 */
+#p1 .gate{width:64vw;max-width:300px;margin:4vh auto 0;opacity:.95}
+#p1 .t2{margin-top:2.4vh;font-size:4vw;letter-spacing:.3em;color:#e8dcc4}
+#p1 .rule{width:22%;height:1px;background:#c8a45c;margin:3vh auto;opacity:.6}
+#p1 .by{font-size:3.1vw;line-height:2;color:#9c9184;letter-spacing:.06em}
+.up{margin-top:6vh;font-size:2.8vw;color:#8d8375;letter-spacing:.3em;animation:float 2.2s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(-8px);opacity:1}}
+
+/* P2 五体文字 */
+.tablets{display:flex;justify-content:center;gap:2.2vw;margin:3.5vh 0 2vh}
+.tab{width:15.5vw;height:23vw;max-height:150px;border:1px solid rgba(200,164,92,.45);
+  border-radius:3px;background:linear-gradient(180deg,rgba(200,164,92,.10),rgba(200,164,92,.02));
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  cursor:pointer;transition:.45s}
+.tab svg{width:44%;height:30%;stroke:#6d6455;stroke-width:1.6;fill:none;transition:.45s}
+.tab .nm{margin-top:8%;font-size:2.5vw;color:#8d8375;writing-mode:vertical-rl;letter-spacing:.2em;transition:.45s}
+.tab.on{border-color:#c8a45c;background:linear-gradient(180deg,rgba(200,164,92,.3),rgba(200,164,92,.06));
+  box-shadow:0 0 22px rgba(200,164,92,.35);transform:translateY(-4px)}
+.tab.on svg{stroke:#f2e4c4}
+.tab.on .nm{color:#c8a45c}
+#p2 .cap{margin-top:2vh;font-size:3.4vw;color:#a99e8d;min-height:2em;letter-spacing:.03em}
+
+/* P3 */
+.quote-box{border-top:1px solid rgba(200,164,92,.4);border-bottom:1px solid rgba(200,164,92,.4);
+  padding:3.4vh 4vw;margin:1vh 0 2.4vh}
+.poem{font-size:5vw;line-height:1.9;color:#f0e3c6;letter-spacing:.1em}
+
+/* P4 对照滑动 */
+.slider{width:100%;overflow-x:auto;scroll-snap-type:x mandatory;display:flex;gap:4vw;
+  padding:2.4vh 0 1vh;scrollbar-width:none}
+.slider::-webkit-scrollbar{display:none}
+.pair{flex:0 0 74%;scroll-snap-align:center;border:1px solid rgba(200,164,92,.3);
+  background:rgba(255,255,255,.02);padding:2.6vh 3vw;border-radius:2px}
+.pair .row{display:flex;align-items:center;justify-content:space-between;gap:2vw}
+.pair .it{flex:1;text-align:center}
+.pair .it .t{font-size:3.5vw;color:#d8cfc0;line-height:1.6}
+.pair .it .l{font-size:2.6vw;color:#8d8375;margin-top:.8vh}
+.pair .arw{font-size:5vw;color:#c8a45c;flex:0 0 auto}
+.pair .note{margin-top:1.8vh;font-size:2.9vw;color:#a99e8d;line-height:1.8;border-top:1px dashed rgba(200,164,92,.3);padding-top:1.6vh}
+.hint{font-size:2.7vw;color:#6d6455;letter-spacing:.2em;margin-top:1vh}
+
+/* P5 */
+.dual{display:flex;margin:3vh 0;border:1px solid rgba(200,164,92,.35)}
+.dual div{flex:1;padding:4vh 1vw;font-size:4vw;letter-spacing:.2em;line-height:1.6}
+.dual .han{background:rgba(200,164,92,.10);color:#e8dcc4}
+.dual .zang{background:rgba(192,82,63,.16);color:#f0d9cf}
+
+/* P6 数字 */
+.nums{display:flex;justify-content:center;align-items:center;gap:5vw;margin:3.6vh 0}
+.num{font-size:15vw;line-height:1;font-weight:bold;
+  background:linear-gradient(180deg,#fbf3e2,#c8a45c);-webkit-background-clip:text;background-clip:text;color:transparent}
+.num.sm{font-size:11vw}
+.unit{font-size:3.4vw;color:#a99e8d;margin-top:1vh;letter-spacing:.1em}
+.arw2{font-size:6vw;color:#c0523f}
+.map{width:82%;max-width:340px;margin:1vh auto 0;opacity:.9}
+
+/* P7 碑 */
+.stele{width:78%;max-width:320px;margin:3vh auto 0;border:1px solid rgba(200,164,92,.45);
+  padding:3vh 3vw;background:linear-gradient(180deg,rgba(200,164,92,.08),transparent)}
+.stele .four{display:flex;justify-content:center;gap:5vw;font-size:4.6vw;color:#c8a45c}
+.stele .t{margin-top:2vh;font-size:3.3vw;color:#d8cfc0;line-height:1.9;letter-spacing:.05em}
+.cite{margin:3vh 3vw 0;padding:2.6vh 4vw;border-left:2px solid #c0523f;
+  background:rgba(192,82,63,.08);text-align:left}
+.cite p{font-size:3.6vw;line-height:1.95;color:#f0e3c6}
+.cite .who{margin-top:1.4vh;font-size:2.8vw;color:#a99e8d;text-align:right}
+
+/* P8 */
+#p8 h2{font-size:9vw;letter-spacing:.25em}
+#p8 .three{margin:4vh 0;font-size:4.6vw;line-height:2.3;color:#e8dcc4;letter-spacing:.06em}
+#p8 .three span{display:block}
+#p8 .last{margin-top:2vh;font-size:4vw;color:#c8a45c;letter-spacing:.08em}
+#p8 .wan{margin-top:4vh;font-size:6vw;letter-spacing:.3em;color:#fbf3e2}
+#p8 .fin{margin-top:1.6vh;font-size:3.2vw;color:#a99e8d;letter-spacing:.1em}
+#p8 .share{margin-top:5vh;font-size:2.8vw;color:#6d6455;letter-spacing:.2em}
+
+/* 入场动画 */
+.fade{opacity:0;transform:translateY(22px);transition:opacity .9s ease,transform .9s ease}
+.fade.in{opacity:1;transform:none}
+.d1{transition-delay:.12s}.d2{transition-delay:.28s}.d3{transition-delay:.44s}
+.d4{transition-delay:.6s}.d5{transition-delay:.76s}
+
+.pno{position:absolute;bottom:3vh;left:0;right:0;font-size:2.6vw;color:#5c544a;letter-spacing:.3em;z-index:3}
+</style>
+</head>
+<body>
+<div id="wrap">
+
+<!-- P1 封面 -->
+<section class="page" id="p1">
+  <div class="bg"></div>
+  <div class="z">
+    <div class="kicker fade">清 · 乾隆十九年</div>
+    <h1 class="big fade d1">一门五语</h1>
+    <div class="t2 fade d2">承德避暑山庄的"天下一家"</div>
+    <svg class="gate fade d3" viewBox="0 0 300 200" fill="none">
+      <rect x="40" y="120" width="220" height="70" stroke="#c8a45c" stroke-width="1"/>
+      <path d="M60 120V70c0-20 40-32 90-32s90 12 90 32v50" stroke="#c8a45c" stroke-width="1"/>
+      <path d="M40 96h220" stroke="#c8a45c" stroke-width="1" opacity=".6"/>
+      <rect x="118" y="140" width="64" height="50" stroke="#c8a45c" stroke-width="1" fill="rgba(200,164,92,.12)"/>
+      <path d="M130 155h40M130 165h40M130 175h40" stroke="#c8a45c" stroke-width="1" opacity=".5"/>
+      <path d="M150 60v18" stroke="#c8a45c" stroke-width="1"/>
+      <circle cx="150" cy="52" r="6" stroke="#c8a45c" stroke-width="1"/>
+    </svg>
+    <div class="rule fade d4"></div>
+    <div class="by fade d4">2026 年北京市大学生人文知识竞赛<br>个人赛决赛 · 创意宣传作品</div>
+    <div class="up fade d5">上滑推门</div>
+  </div>
+  <div class="pno">01 / 08</div>
+</section>
+
+<!-- P2 五种文字 -->
+<section class="page" id="p2">
+  <div class="bg"></div>
+  <div class="z">
+    <div class="kicker fade">丽正门 · 门额</div>
+    <h2 class="fade d1">一块匾上<br>写着五种文字</h2>
+    <div class="tablets fade d2">
+      <div class="tab" data-n="满文"><svg viewBox="0 0 40 30"><path d="M8 6v18M8 12l10-6M8 20l10 6M20 6v18M30 8v14M26 15h8"/></svg><div class="nm">满</div></div>
+      <div class="tab" data-n="蒙古文"><svg viewBox="0 0 40 30"><path d="M20 4v22M12 10h16M12 18h16M8 24l12-8M32 24l-12-8"/></svg><div class="nm">蒙古</div></div>
+      <div class="tab" data-n="汉文"><svg viewBox="0 0 40 30"><path d="M8 10h24M20 4v22M12 24l8-10 8 10"/></svg><div class="nm">汉</div></div>
+      <div class="tab" data-n="藏文"><svg viewBox="0 0 40 30"><path d="M10 8h20M10 8l4 14M30 8l-4 14M14 22h12M20 4v18"/></svg><div class="nm">藏</div></div>
+      <div class="tab" data-n="维吾尔文"><svg viewBox="0 0 40 30"><path d="M12 22c0-8 6-14 14-14M26 8c-6 0-10 4-10 10M8 10c4 2 8 2 12 0M22 22c4-2 8-2 12-4"/></svg><div class="nm">维吾尔</div></div>
+    </div>
+    <div class="cap fade d3" id="cap">点击五种文字，把它们依次点亮</div>
+    <div class="quote fade d4">五种文字并排刻在同一块汉白玉匾额上<br>说的是同一句话——<span class="gold">丽正门</span></div>
+    <div class="jinju fade d5">一座皇家园林的正门<br>用五种语言写着同一个"请进"</div>
+  </div>
+  <div class="pno">02 / 08</div>
+</section>
+
+<!-- P3 一门 -->
+<section class="page" id="p3">
+  <div class="bg"></div>
+  <div class="z">
+    <div class="kicker fade">乾隆十九年 · 1754</div>
+    <div class="quote-box fade d1">
+      <div class="poem">两字新题标丽正<br>车书恒此会遐方</div>
+      <div class="src">——乾隆《丽正门》</div>
+    </div>
+    <div class="sub fade d2">乾隆亲题门额，取《易经》<br>"日月丽乎天……重明以丽乎正，乃化成天下"之意</div>
+    <div class="small fade d3" style="margin-top:3vh;line-height:2.1">
+      "车书"出自<span class="gold">"车同轨、书同文"</span><br>是中华文明对大一统最古老的表述<br>"会遐方"，是远方之人来此相会
+    </div>
+    <div class="jinju fade d4">五种文字写同一个门名<br>就是"书同文"的一次实景演示</div>
+  </div>
+  <div class="pno">03 / 08</div>
+</section>
+
+<!-- P4 外八庙 上 -->
+<section class="page" id="p4">
+  <div class="bg"></div>
+  <div class="z">
+    <div class="kicker fade">外八庙 · 1713—1780</div>
+    <h2 class="fade d1">进来之后<br>得让人住得下</h2>
+    <div class="small fade d2">山庄周围共建起十二座皇家寺庙<br>八座由理藩院直管、朝廷发饷<br>因在长城之外，统称"外八庙"</div>
+    <div class="slider fade d3">
+      <div class="pair">
+        <div class="row"><div class="it"><div class="t">拉萨 · 布达拉宫</div><div class="l">原型</div></div>
+          <div class="arw">→</div><div class="it"><div class="t">普陀宗乘之庙</div><div class="l">承德</div></div></div>
+        <div class="note">俗称"小布达拉宫"，乾隆六十寿辰，蒙古、青海、天山南北各族首领云集承德</div>
+      </div>
+      <div class="pair">
+        <div class="row"><div class="it"><div class="t">日喀则 · 扎什伦布寺</div><div class="l">原型</div></div>
+          <div class="arw">→</div><div class="it"><div class="t">须弥福寿之庙</div><div class="l">承德</div></div></div>
+        <div class="note">为六世班禅朝觐而建，又称"班禅行宫"</div>
+      </div>
+      <div class="pair">
+        <div class="row"><div class="it"><div class="t">伊犁 · 固尔扎庙</div><div class="l">原型</div></div>
+          <div class="arw">→</div><div class="it"><div class="t">安远庙</div><div class="l">承德</div></div></div>
+        <div class="note">为迁居热河的准噶尔蒙古达什达瓦部提供宗教活动场所</div>
+      </div>
+      <div class="pair">
+        <div class="row"><div class="it"><div class="t">扎囊 · 桑耶寺</div><div class="l">原型</div></div>
+          <div class="arw">→</div><div class="it"><div class="t">普宁寺</div><div class="l">承德</div></div></div>
+        <div class="note">普乐寺则供哈萨克、维吾尔、柯尔克孜等新疆首领瞻礼居住</div>
+      </div>
+    </div>
+    <div class="hint fade d3">← 左右滑动 →</div>
+    <div class="jinju fade d4">一座庙，为一个民族而建<br>这不是建筑，是心意</div>
+  </div>
+  <div class="pno">04 / 08</div>
+</section>
+
+<!-- P5 普宁寺 -->
+<section class="page" id="p5">
+  <div class="bg"></div>
+  <div class="z">
+    <div class="kicker fade">普宁寺 · 大乘之阁</div>
+    <h2 class="fade d1">把你的家乡<br>盖进我的院子</h2>
+    <div class="dual fade d2">
+      <div class="han">汉式</div><div class="zang">藏式</div>
+    </div>
+    <div class="sub fade d3" style="text-align:left">
+      前半部为汉式禅宗寺庙<br>后半部为白台黄瓦的藏式建筑<br>虽仿桑耶寺而建，却将汉、藏建筑样式重新组合<br><span class="gold">创新大于模仿</span>
+    </div>
+    <div class="jinju fade d4">前半是汉式，后半是藏式<br>它们在一座庙里，相处了二百多年</div>
+    <div class="src fade d5">殿、阁、楼、塔、台、亭、廊<br>集汉、藏、蒙多民族建筑精华之大成</div>
+  </div>
+  <div class="pno">05 / 08</div>
+</section>
+
+<!-- P6 东归 -->
+<section class="page" id="p6">
+  <div class="bg"></div>
+  <div class="z">
+    <div class="kicker fade">乾隆三十六年 · 1771</div>
+    <h2 class="fade d1">走了万里<br>还是要回来</h2>
+    <div class="nums fade d2">
+      <div><div class="num" id="n1">0</div><div class="unit">出发（万人）</div></div>
+      <div class="arw2">→</div>
+      <div><div class="num num2 sm" id="n2">0</div><div class="unit">抵伊犁（万人）</div></div>
+    </div>
+    <svg class="map fade d2" viewBox="0 0 340 90" fill="none">
+      <path d="M20 60C90 20 180 20 300 55" stroke="#c8a45c" stroke-width="1.2" stroke-dasharray="4 4"/>
+      <circle cx="20" cy="60" r="4" stroke="#c8a45c" stroke-width="1.2" fill="rgba(200,164,92,.3)"/>
+      <circle cx="300" cy="55" r="5" stroke="#c0523f" stroke-width="1.2" fill="rgba(192,82,63,.35)"/>
+      <text x="16" y="78" fill="#8d8375" font-size="11" font-family="serif">伏尔加河</text>
+      <text x="262" y="76" fill="#c0523f" font-size="11" font-family="serif">伊犁</text>
+    </svg>
+    <div class="sub fade d3" style="margin-top:2.4vh">
+      在伏尔加河游牧一个半世纪<br>因不堪沙俄压迫，十七万人决意东归<br>穿越险峻山川、浩瀚沙漠，冲破围追堵截
+    </div>
+    <div class="small fade d4" style="margin-top:2.4vh">
+      清宫档案《满文录副奏折》记：<br><span class="gold">"其至伊犁者，仅以半计"</span>
+    </div>
+    <div class="jinju fade d5">离家一百多年，隔着万里<br>还是要回来——这就是"向心力"</div>
+  </div>
+  <div class="pno">06 / 08</div>
+</section>
+
+<!-- P7 归来 -->
+<section class="page" id="p7">
+  <div class="bg"></div>
+  <div class="z">
+    <div class="kicker fade">普陀宗乘之庙 · 碑亭</div>
+    <h2 class="fade d1">为一次归来<br>立两块碑</h2>
+    <div class="stele fade d2">
+      <div class="four"><span>满</span><span>汉</span><span>蒙</span><span>藏</span></div>
+      <div class="t">《土尔扈特全部归顺记》<br>《优恤土尔扈特部众记》<br>乾隆亲撰，四体文字刻石</div>
+    </div>
+    <div class="small fade d3" style="margin-top:2.6vh;line-height:2">
+      同年秋，乾隆在避暑山庄接见并宴请渥巴锡<br>封其为"卓理克图汗"（英勇汗）<br>渥巴锡献上祖传腰刀
+    </div>
+    <div class="cite fade d4">
+      <p>"土尔扈特部都去了100多年了，最终还是义无反顾要回到祖国，这真正体现了我们中华民族的影响力和向心力。"</p>
+      <div class="who">——2021 年考察承德避暑山庄</div>
+    </div>
+  </div>
+  <div class="pno">07 / 08</div>
+</section>
+
+<!-- P8 升华 -->
+<section class="page" id="p8">
+  <div class="bg"></div>
+  <div class="z">
+    <div class="kicker fade">结语</div>
+    <h2 class="fade d1">天下一家</h2>
+    <div class="three fade d2">
+      <span>有门，才进得来</span>
+      <span>有庙，才住得下</span>
+      <span>有人走了万里还要回来，才叫家园</span>
+    </div>
+    <div class="last fade d3">这道门，两百多年没关过</div>
+    <div class="wan fade d4">万方来会</div>
+    <div class="fin fade d5">中华民族共有精神家园</div>
+    <div class="share fade d5">长按保存 · 分享转发</div>
+  </div>
+  <div class="pno">08 / 08</div>
+</section>
+
+</div>
+
+<script>
+// 入场动画
+var io=new IntersectionObserver(function(es){
+  es.forEach(function(e){
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.fade').forEach(function(f){f.classList.add('in')});
+      if(e.target.id==='p6'){countUp()}
+    }
+  });
+},{threshold:.35});
+document.querySelectorAll('.page').forEach(function(p){io.observe(p)});
+
+// P2 五体文字点亮
+var tabs=document.querySelectorAll('.tab'),cap=document.getElementById('cap'),lit=0;
+var names={'满文':'满文','蒙古文':'蒙古文','汉文':'汉文','藏文':'藏文','维吾尔文':'维吾尔文'};
+tabs.forEach(function(t){
+  t.addEventListener('click',function(){
+    if(!t.classList.contains('on')){
+      t.classList.add('on');lit++;
+      cap.textContent='已点亮 '+lit+' / 5 —— '+t.dataset.n;
+      if(lit===5){setTimeout(function(){cap.textContent='五种文字，同一个读音：丽正门'},600)}
+    }
+  });
+});
+
+// P6 数字滚动
+var done=false;
+function countUp(){
+  if(done)return;done=true;
+  anim(document.getElementById('n1'),17,1400);
+  setTimeout(function(){anim(document.getElementById('n2'),8,900)},900);
+}
+function anim(el,target,dur){
+  var s=performance.now();
+  (function step(now){
+    var p=Math.min((now-s)/dur,1);
+    el.textContent=Math.round(target*(1-Math.pow(1-p,3)));
+    if(p<1)requestAnimationFrame(step);
+  })(s);
+}
+
+// 点击/上滑翻页
+var wrap=document.getElementById('wrap');
+document.addEventListener('click',function(e){
+  if(e.target.closest('.tab')||e.target.closest('.slider'))return;
+  var h=window.innerHeight;
+  wrap.scrollTo({top:Math.round(wrap.scrollTop/h+1)*h,behavior:'smooth'});
+});
+</script>
+</body>
+</html>
